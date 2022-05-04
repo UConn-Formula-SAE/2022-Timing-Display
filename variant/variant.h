@@ -79,14 +79,25 @@ extern "C" unsigned int PINCOUNT_fn();
  */
 // #define digitalPinToTimer(P)
 
+
+#define PA04               	(17ul)
+#define PA05                (18ul)
+#define PA06				(40ul)
+#define PA07				(41ul)
+#define PA08				(4ul)
+#define PA09				(3ul)
+#define PA10       			(1ul)
+#define PA15				(5ul)
+#define PA16				(11ul)
+#define PA17				(13ul)
+#define PA18				(36ul)
+#define PA19				(34ul)
+#define PA20				(6ul)
+#define PA21				(6ul)
+#define PA21				(7ul)
+
 // LEDs
-#define PIN_LED_13           (13u)
-#define PIN_LED_RXL          (25u)
-#define PIN_LED_TXL          (26u)
-#define PIN_LED              PIN_LED_13
-#define PIN_LED2             PIN_LED_RXL
-#define PIN_LED3             PIN_LED_TXL
-#define LED_BUILTIN          PIN_LED_13
+#define LED_BUILTIN          PA10
 
 /*
  * Analog pins
@@ -94,16 +105,16 @@ extern "C" unsigned int PINCOUNT_fn();
 #define PIN_A0               (14ul)
 #define PIN_A1               (15ul)
 #define PIN_A2               (16ul)
-#define PIN_A3               (17ul)
-#define PIN_A4               (18ul)
+
+
 #define PIN_A5               (19ul)
 #define PIN_DAC0             (14ul)
 
 static const uint8_t A0  = PIN_A0;
 static const uint8_t A1  = PIN_A1;
 static const uint8_t A2  = PIN_A2;
-static const uint8_t A3  = PIN_A3;
-static const uint8_t A4  = PIN_A4;
+static const uint8_t A3  = PIN_A0;
+static const uint8_t A4  = PIN_A0;
 static const uint8_t A5  = PIN_A5;
 static const uint8_t DAC0 = PIN_DAC0;
 #define ADC_RESOLUTION		12
@@ -123,7 +134,7 @@ static const uint8_t ATN = PIN_ATN;
 
 // Serial1
 #define PIN_SERIAL1_RX       (0ul)
-#define PIN_SERIAL1_TX       (1ul)
+
 #define PAD_SERIAL1_TX       (UART_TX_PAD_2)
 #define PAD_SERIAL1_RX       (SERCOM_RX_PAD_3)
 
