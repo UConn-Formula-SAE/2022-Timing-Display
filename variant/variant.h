@@ -93,7 +93,6 @@ extern "C" unsigned int PINCOUNT_fn();
 #define PA18				(36ul)
 #define PA19				(34ul)
 #define PA20				(6ul)
-#define PA21				(6ul)
 #define PA21				(7ul)
 
 // LEDs
@@ -132,25 +131,26 @@ static const uint8_t ATN = PIN_ATN;
 #define PAD_SERIAL_TX       (UART_TX_PAD_2)
 #define PAD_SERIAL_RX       (SERCOM_RX_PAD_3)
 
+
 // Serial1
-#define PIN_SERIAL1_RX       (0ul)
-#define PIN_SERIAL1_TX		 (0ul)
-#define PAD_SERIAL1_TX       (UART_TX_PAD_2)
-#define PAD_SERIAL1_RX       (SERCOM_RX_PAD_3)
+// #define PIN_SERIAL1_RX       (0ul)
+// #define PIN_SERIAL1_TX		(0ul)
+// #define PAD_SERIAL1_TX       (UART_TX_PAD_2)
+// #define PAD_SERIAL1_RX       (SERCOM_RX_PAD_3)
 
 /*
  * SPI Interfaces
  */
 #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO         (22u)
-#define PIN_SPI_MOSI         (23u)
-#define PIN_SPI_SCK          (24u)
-#define PERIPH_SPI           sercom4
-#define PAD_SPI_TX           SPI_PAD_2_SCK_3
+#define PIN_SPI_MISO         PA05
+#define PIN_SPI_MOSI         PA04
+#define PIN_SPI_SCK          PA07
+#define PERIPH_SPI           sercom0
+#define PAD_SPI_TX           SPI_PAD_1_SCK_3
 #define PAD_SPI_RX           SERCOM_RX_PAD_0
 
-static const uint8_t SS	  = PIN_A2 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
+static const uint8_t SS	  = PA06 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
 static const uint8_t MOSI = PIN_SPI_MOSI ;
 static const uint8_t MISO = PIN_SPI_MISO ;
 static const uint8_t SCK  = PIN_SPI_SCK ;
@@ -162,8 +162,8 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 
 #define PIN_WIRE_SDA         PA08
 #define PIN_WIRE_SCL         PA09
-#define PERIPH_WIRE          sercom3
-#define WIRE_IT_HANDLER      SERCOM3_Handler
+#define PERIPH_WIRE          sercom2
+#define WIRE_IT_HANDLER      SERCOM2_Handler
 
 static const uint8_t SDA = PIN_WIRE_SDA;
 static const uint8_t SCL = PIN_WIRE_SCL;
@@ -208,7 +208,7 @@ extern SERCOM sercom4;
 extern SERCOM sercom5;
 
 extern Uart Serial;
-extern Uart Serial1;
+//extern Uart Serial1;
 
 #endif
 
@@ -236,10 +236,11 @@ unsigned int PINCOUNT_fn();
 // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
 //                            pins are NOT connected to anything by default.
 #define SERIAL_PORT_USBVIRTUAL      SerialUSB
-#define SERIAL_PORT_MONITOR         Serial
+#define SERIAL_PORT_MONITOR         SerialUSB
 // Serial has no physical pins broken out, so it's not listed as HARDWARE port
-#define SERIAL_PORT_HARDWARE        Serial1
-#define SERIAL_PORT_HARDWARE_OPEN   Serial1
+//#define SERIAL_PORT_HARDWARE        Serial1
+//#define SERIAL_PORT_HARDWARE_OPEN   Serial1
+//#define Serial 						SerialUSB
+
 
 #endif /* _VARIANT_ARDUINO_ZERO_ */
-

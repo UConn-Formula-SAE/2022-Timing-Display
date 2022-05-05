@@ -1,11 +1,23 @@
-#include <AS1115.h>
 
-#define CAL_IN 27
-#define CAL_A 28
-#define CAL_B 29
-#define CAL_C 30
 
-AS1115 disp = AS1115(0x00);
+
+#define CAN_MOSI (PA04)
+#define CAN_MISO (PA05)
+#define CAN_CS (PA06)
+#define CAN_SCLK (PA07)
+#define SEG_SDI (PA08)
+#define SEG_SCK (PA09)
+#define DEBUG_LED (PA10)
+#define SWS1 (PA15)
+#define SWS2 (PA16)
+#define CAN_INT (PA17)
+#define CAL_IN (PA18)
+#define CAL_A (PA19)
+#define CAL_B (PA20)
+#define CAL_C (PA21)
+
+
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,6 +25,11 @@ void setup() {
   pinMode(CAL_A, OUTPUT);
   pinMode(CAL_B, OUTPUT);
   pinMode(CAL_C, OUTPUT);
+  pinMode(DEBUG_LED, OUTPUT);
+  digitalWrite(DEBUG_LED, HIGH); 
+  SerialUSB.begin(115200);
+  while(!SerialUSB);
+  SerialUSB.println("Connected");
 }
 
 int check_cal(){
@@ -34,12 +51,20 @@ void display_cal(){
   unsigned long endtime = starttime;
   while (starttime - endtime <= 1000){
      int cal_pos = check_cal();
-     disp
+     
   }
 }
 
+int cal_pos = 0;
+int last;
 void loop() {
   // put your main code here, to run repeatedly:
-  
+  if (cal_pos){
+    last = cal_pos;
+  }
+  cal_pos = check_cal();
+  if (cal_pos != last){
+    SerialUSB.println(cal_pos);
+  }
   
 }
