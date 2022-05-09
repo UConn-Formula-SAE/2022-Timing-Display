@@ -24,12 +24,13 @@ AS1115 disp;
 void setup(void) {
   
   pinMode(PA10, OUTPUT);
-  digitalWrite(PA10, HIGH);
+  
   SerialUSB.begin(115200);
-  while(!SerialUSB);
   SerialUSB.print("Initializing AS1115...");
-  disp = AS1115(0x00);
+  digitalWrite(PA10, HIGH);
+  disp = AS1115(0x03);
   disp.begin();
+  disp.setIntensity(0xff);
   disp.setFont(FONT_HEX);
   disp.setDecode(DECODE_ALL_FONT);
   disp.digitWrite(0, 0);
@@ -45,15 +46,15 @@ void setup(void) {
 
 void loop(void) {
   byte digit;
-  
-  //SerialUSB.print("Displaying ");
+   
+  SerialUSB.print("Displaying ");
   for(digit=0; digit<=7; digit++) {
-    //disp.digitWrite(digit, counter);
+    disp.digitWrite(digit, counter);
     SerialUSB.print(counter, HEX);
   }
   SerialUSB.println("");
   counter++;
-  if(counter == 0x10){
+  if(counter == 0x0A){
     counter = 0;
   }
   
