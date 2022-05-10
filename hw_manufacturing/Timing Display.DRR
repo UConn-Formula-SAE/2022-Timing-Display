@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Timing Display.PcbDoc   4/20/2022  11:26:38 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Timing Display-RoundHoles.TXT
+ASCII SlotHoles File : Timing Display-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      10mil (0.254mm)                                           Round             298       PTH        28.48inch (723.42mm)
+T2      15mil (0.381mm)                                           Round             45        PTH        13.89inch (352.70mm)
+T3      16mil (0.399mm)                                           Slot              4         PTH        0.33inch (8.35mm)
+T4      22mil (0.551mm)                                           Round             12        PTH        0.54inch (13.75mm)
+T5      26mil (0.65mm)                                            Round             10        PTH        0.45inch (11.43mm)
+T6      90mil (2.286mm)                                           Round             4         PTH        4.41inch (112.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              373
+
+Total Processing Time (hh:mm:ss) : 00:00:01

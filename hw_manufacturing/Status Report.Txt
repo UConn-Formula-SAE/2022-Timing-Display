@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Timing Display Board v1.1.PrjPcb]
+   Generated File[Timing Display-RoundHoles.TXT]
+   Generated File[Timing Display-SlotHoles.TXT]
+   Generated File[Timing Display.LDP]
+   Generated File[Timing Display.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 11:26:39 PM On 4/20/2022
