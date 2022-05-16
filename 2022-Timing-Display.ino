@@ -1,5 +1,8 @@
+#include <mcp_can.h>
+#include <mcp_can_dfs.h>
 
-
+#include <Wire.h>
+#include <AS1115.h>
 
 #define CAN_MOSI (PA04)
 #define CAN_MISO (PA05)
@@ -18,53 +21,49 @@
 
 
 
+byte counter = 0;
+AS1115 disp;
 
-void setup() {
-  // put your setup code here, to run once:
-  pinMode(CAL_IN, INPUT);
-  pinMode(CAL_A, OUTPUT);
-  pinMode(CAL_B, OUTPUT);
-  pinMode(CAL_C, OUTPUT);
-  pinMode(DEBUG_LED, OUTPUT);
-  digitalWrite(DEBUG_LED, HIGH); 
+void setup(void) {
+  
+  pinMode(PA10, OUTPUT);
+  
   SerialUSB.begin(115200);
-  while(!SerialUSB);
-  SerialUSB.println("Connected");
+  SerialUSB.print("Initializing AS1115...");
+  digitalWrite(PA10, HIGH);
+  disp = AS1115(0x03);
+  disp.begin();
+  disp.setIntensity(0xff);
+  disp.setFont(FONT_HEX);
+  disp.setDecode(DECODE_ALL_FONT);
+  disp.digitWrite(0, 0);
+  disp.digitWrite(1, 1);
+  disp.digitWrite(2, 2);
+  disp.digitWrite(3, 3);
+  disp.digitWrite(4, 4);
+  disp.digitWrite(5, 5);
+  disp.digitWrite(6, 6);
+  disp.digitWrite(7, 7);
+  SerialUSB.println("done.");
 }
 
-int check_cal(){
-  int cal_pos = 1;
-  for (int i = 0; i < 8; i++) {
-        digitalWrite(CAL_A, i & 1 ? HIGH : LOW);
-        digitalWrite(CAL_B,  i & 2 ? HIGH : LOW);
-        digitalWrite(CAL_C,  i & 4 ? HIGH : LOW);
-        if (digitalRead(CAL_IN) == HIGH){
-          cal_pos = i + 2;
-        }
+void loop(void) {
+  byte digit;
+   
+  SerialUSB.print("Displaying ");
+  for(digit=0; digit<=7; digit++) {
+    disp.digitWrite(digit, 8);
+    SerialUSB.print(counter, HEX);
   }
-  return cal_pos;
-}
-
-
-void display_cal(){
-  unsigned long starttime = millis();
-  unsigned long endtime = starttime;
-  while (starttime - endtime <= 1000){
-     int cal_pos = check_cal();
-     
-  }
-}
-
-int cal_pos = 0;
-int last;
-void loop() {
-  // put your main code here, to run repeatedly:
-  if (cal_pos){
-    last = cal_pos;
-  }
-  cal_pos = check_cal();
-  if (cal_pos != last){
-    SerialUSB.println(cal_pos);
+  SerialUSB.println("");
+  counter++;
+  if(counter == 0x0A){
+    counter = 0;
   }
   
+  digitalWrite(PA10, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                       // wait for a second
+  digitalWrite(PA10, LOW);    // turn the LED off by making the voltage LOW
+  delay(100);
+  delay(500);
 }
